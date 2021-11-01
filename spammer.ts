@@ -97,7 +97,7 @@ const startBot = async (name, code) => {
     // Get ClientID and TC (idk what TC is, probably some timezone stuff, might be useless)
     const { clientId, tc } = await new Promise((resolve, reject) => {
         client.once('message', message => {
-            const data = JSON.parse(message);
+            const data = JSON.parse(message.toString());
             resolve({
                 clientId: data[0].clientId,
                 tc: data[0].ext.timesync.tc
@@ -120,9 +120,9 @@ const startBot = async (name, code) => {
     );
 
     // Wait for a message
-    await new Promise((resolve, reject) => {
+    await new Promise ((resolve, reject) => {
         client.once('message', message => {
-            resolve();
+            resolve(message);
         });
     });
 
